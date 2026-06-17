@@ -1,0 +1,32 @@
+services:
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+
+    container_name: marketpilot-timescaledb
+
+    environment:
+      POSTGRES_DB: marketpilot
+      POSTGRES_USER: marketpilot
+      POSTGRES_PASSWORD: marketpilot
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+
+    container_name: marketpilot-redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+volumes:
+  timescaledb_data:
+  redis_data:
